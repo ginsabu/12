@@ -1,8 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "board.h"
+#define MAX_DIE		6
 
-
+int rolldie(void)
+{
+	return rand() % MAX_DIE + 1;
+}
 int main(int argc, char *argv[]) {
 	
 	srand ((unsigned) (time(NULL)));
@@ -32,8 +37,37 @@ int main(int argc, char *argv[]) {
 	printf("-------------------------------------------------------------------------------\n\n");
 	
 	
-	//step 1
+	//step 1. INITIALIZATION
+	board_initBoard();
 	
+	//step 2. turn play(do-while)
+	int cnt = 0;
+	int pos = 0;
+	
+	do {
+		int die_result;
+		int coinResult;
+		
+		//2-1. status
+		int board_printBoardStatus(int pos);
+		
+		//2-2. roll die
+		die_result = rolldie();
+		
+		//2-3. move (Result)
+		pos += die_result;
+		
+		printf("Pos : %i (die : %i)\n", pos, die_result);
+		
+		coinResult = board_getBoardCoin(pos);
+		
+		printf("Coin : %i\n");
+		
+		//2-4. change turn, shark move
+	
+	} while(cnt<5);
+	
+		
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	printf("-------------------------------------------------------------------------------\n");
 	printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
